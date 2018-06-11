@@ -1,0 +1,879 @@
+<html>
+	<head>
+		<title>Boarding School Advisors</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<style>
+		.dropbtn {
+			background-color: darkgray;
+			color: white;
+			padding: 16px;
+			font-size: 16px;
+			border: none;
+			width:300px;
+			cursor: pointer;
+		}
+
+		.dropbtn:hover, .dropbtn:focus {
+			background-color: Tomato;
+		}
+
+		#myInput {
+			border-box: box-sizing;
+			background-image: url('searchicon.png');
+			background-position: 14px 12px;
+			background-repeat: no-repeat;
+			font-size: 16px;
+			padding: 14px 20px 12px 45px;
+			border: none;
+			border-bottom: 1px solid #ddd;
+		}
+
+		#myInput:focus {outline: 3px solid #ddd;}
+
+		.dropdown {
+			position: relative;
+			display: inline-block;
+		}
+
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			background-color: #f6f6f6;
+			min-width: 230px;
+			overflow: auto;
+			border: 1px solid #ddd;
+			z-index: 1;
+		}
+
+		.dropdown-content a {
+			color: black;
+			padding: 12px 16px;
+			text-decoration: none;
+			display: block;
+		}
+
+		.dropdown a:hover {background-color: #ddd}
+
+		.show {display:block;}
+		
+		
+		/*SCHOOLS TAB*/
+		.schoolsTable,th,td{
+		border-bottom: 1px solid black;
+		text-align: center;
+
+		}
+		th{
+		height: 35px;
+		background-color: Tomato;
+		color: white;
+		}
+		td{
+		height: 50px;
+		}
+		tr:nth-child(even){
+		background-color:#f2f2f2;
+		}
+		
+		/*LOG IN AND SIGN UP TABS*/
+		* {box-sizing: border-box}
+		/* Full-width input fields */
+  		input[type=text], input[type=password] {
+  		width: 100%;
+  		padding: 15px;
+  		margin: 5px 0 22px 0;
+  		display: inline-block;
+  		border: none;
+  		background: #f1f1f1;
+		}
+		input[type=text]:focus, input[type=password]:focus {
+		  background-color: #ddd;
+ 		 outline: none;
+		}
+		hr {
+		  border: 1px solid #f1f1f1;
+ 		  margin-bottom: 25px;
+		}		
+		/* Set a style for all buttons */
+		.container button {
+ 		 background-color: DodgerBlue;
+  		color: white;
+  		padding: 14px 20px;
+  		margin: 8px 0;
+  		border: none;
+  		cursor: pointer;
+  		width: 100%;
+  		opacity: 0.9;
+		}
+		.container button:hover {
+  		opacity:1;
+		}
+		/* Extra styles for the cancel button */
+		.cancelbtn {
+  		padding: 14px 20px;
+  		background-color: DodgerBlue;
+		}
+		/* Float cancel and signup buttons and add an equal width */
+		.cancelbtn, .signupbtn, .loginbtn {
+ 		 float: left;
+ 		 width: 50%;
+ 		 background-color: DodgerBlue;
+		}	
+		/* Add padding to container elements */
+		.container {
+		  padding: 16px;
+		  width:700px;
+		}
+		/* Clear floats */
+		.clearfix::after {
+  		content: "";
+  		clear: both;
+  		display: table;
+		}
+		/* Change styles for cancel button and signup button on extra small screens */
+		@media screen and (max-width: 300px) {
+  		.cancelbtn, .signupbtn {
+    		width: 100%;
+  		}
+		}
+		
+		body {
+		background-color: white;
+		}
+		
+		.center {
+   			 display: block;
+    		 margin-left: auto;
+    		 margin-right: auto;
+    		 width: 50%;
+		}
+		
+		/* Header attributes */
+		.head {
+    		height: 100px;
+    		margin-left: auto;
+    		margin-right: auto;
+    		padding:0px;
+    		text-align: center;
+			vertical-align: middle;
+			line-height: 100px;
+			font-family:courier;
+		}
+		
+		/* Style the tab */
+		.tab {
+    		overflow: hidden;
+   			border: 3px solid #ccc;
+    		background-color: #f1f1f1;
+    		margin-left: auto;
+    		margin-right: auto;
+		}
+
+		/* Style the buttons that are used to open the tab content */
+		.tab button {
+   			background-color: inherit;
+    		float: left;
+    		border: none;
+    		outline: none;
+    		cursor: pointer;
+    		padding: 20px 40px;
+    		transition: 0.3s;
+		}
+
+		/* Change background color of buttons on hover */
+		.tab button:hover {
+    		background-color: #ddd;
+		}
+
+		/* Create an active/current tablink class */
+		.tab button.active {
+    		background-color: #ccc;
+		}
+
+		/* Style the tab content */
+		.tabcontent {
+    		display: none;
+    		padding: 10px 15px;
+    		border: 1px solid #ccc;
+    		border-top: none;
+    		size: 7; 
+		}
+		
+		</style>
+	</head>
+	
+	
+	<body>
+		<div style="background-color:tomato" class="head"> 
+		<h1 style="color:white">Welcome to Boarding School Advisors!</h1>
+		</div>
+		
+		<div class="tab">
+  			<button class="tablinks" onclick="openTab(event, 'Home')">Home</button>
+  			<button class="tablinks" onclick="openTab(event, 'Schools')">Schools</button>
+  			<button class="tablinks" onclick="openTab(event, 'About Us')">About Us</button>
+  			<button class="tablinks" onclick="openTab(event, 'FAQ')">FAQ</button>
+  			<button class="tablinks" onclick="openTab(event, 'Log In')">Log In</button>
+  			<button class="tablinks" onclick="openTab(event, 'Sign Up')">Sign Up</button>
+  			<button class="tablinks" onclick="openTab(event, 'Contact')">Contact</button>
+		</div>
+		<!-- Tab content -->
+		<div id="Home" class="tabcontent">
+  			<p align="center"> We are a group of advisors with personal experience applying to boarding school. 
+			People who are determined to guide you through the various aspects of applying such as touring,
+			interviewing, essay writing, testing, reaching out to coaches, and much more! We understand going through 
+			the boarding school process can be difficult and confusing. With our services you will become
+			an expert on the application and boarding school life. Let us open the door for your child's next 
+			step in life.
+			</p>
+			<img src="BlankMap-USA-states.png" alt="United States" class="center">
+		</div>
+		<div id="Schools" class="tabcontent">
+		<br>
+			<div class="dropdown">
+			<button onclick="myFunction()" class="dropbtn">Search By State  <i class="fa fa-caret-down"></i></button>
+			  <div id="myDropdown" class="dropdown-content">
+				<input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+				<a href="#Alabama" onclick="showSchools('Alabama')">Alabama</a>
+				<a href="#Alaska" onclick="showSchools('Alaska')">Alaska</a>
+				<a href="#Arizona" onclick="showSchools('Arizona')">Arizona</a>
+				<a href="#Arkansas" onclick="showSchools('Arkansas')">Arkansas</a>
+				<a href="#California" onclick="showSchools('California')">California</a>
+				<a href="#Colorado" onclick="showSchools('Colorado')">Colorado</a>
+				<a href="#Connecticut" onclick="showSchools('Connecticut')">Connecticut</a>
+				<a href="#Delaware" onclick="showSchools('Delaware')">Delaware</a>
+				<a href="#District of Columbia" onclick="showSchools('District of Columbia')">District of Columbia</a>
+				<a href="#Florida" onclick="showSchools('Florida')">Florida</a>
+				<a href="#Georgia" onclick="showSchools('Georgia')">Georgia</a>
+				<a href="#Illinois" onclick="showSchools('Illinois')">Illinois</a>
+				<a href="#Indiana" onclick="showSchools('Indiana')">Indiana</a>
+				<a href="#Iowa" onclick="showSchools('Iowa')">Iowa</a>
+				<a href="#Kansas" onclick="showSchools('Kansas')">Kansas</a>
+				<a href="#Kentucky" onclick="showSchools('Kentucky')">Kentucky</a>
+				<a href="#Maine" onclick="showSchools('Maine')">Maine</a>
+				<a href="#Maryland" onclick="showSchools('Maryland')">Maryland</a>
+				<a href="#Massachusetts" onclick="showSchools('Massachusetts')">Massachusetts</a>
+				<a href="#Michigan" onclick="showSchools('Michigan')">Michigan</a>
+				<a href="#Minnesota" onclick="showSchools('Minnesota')">Minnesota</a>
+				<a href="#Mississippi" onclick="showSchools('Mississippi')">Mississippi</a>
+				<a href="#Missouri" onclick="showSchools('Missouri')">Missouri</a>
+				<a href="#Montana" onclick="showSchools('Montana')">Montana</a>
+				<a href="#Nebraska" onclick="showSchools('Nebraska')">Nebraska</a>
+				<a href="#New Hampshire" onclick="showSchools('New Hampshire')">New Hampshire</a>
+				<a href="#New Jersey" onclick="showSchools('New Jersey')">New Jersey</a>
+				<a href="#New Mexico" onclick="showSchools('New Mexico')">New Mexico</a>
+				<a href="#New York" onclick="showSchools('New York')">New York</a>
+				<a href="#North Carolina" onclick="showSchools('North Carolina')">North Carolina</a>
+				<a href="#Ohio" onclick="showSchools('Ohio')">Ohio</a>
+				<a href="#Oregon" onclick="showSchools('Oregon')">Oregon</a>
+				<a href="#Pennsylvania" onclick="showSchools('Pennsylvania')">Pennsylvania</a>
+				<a href="#South Carolina" onclick="showSchools('South Carolina')">South Carolina</a>
+				<a href="#Tennessee" onclick="showSchools('Tennessee')">Tennessee</a>
+				<a href="#Texas" onclick="showSchools('Texas')">Texas</a>
+				<a href="#Utah" onclick="showSchools('Utah')">Utah</a>
+				<a href="#Vermont" onclick="showSchools('Vermont')">Vermont</a>
+				<a href="#Virginia" onclick="showSchools('Virginia')">Virginia</a>
+				<a href="#Washington" onclick="showSchools('Washington')">Washington</a>
+				<a href="#West Virginia" onclick="showSchools('West Virginia')">West Virginia</a>
+				<a href="#Wisconsin" onclick="showSchools('Wisconsin')">Wisconsin</a>
+			  </div>
+			  <br>
+			  <h2 id="NameOfSchool" style="text-align:center">Alabama</h2>
+			  <table id="schoolsTable" style="margin: auto;">
+			  <col width="700">
+			  <col width="700">
+  			<tr>
+  				<th>Name of School</th>
+  				<th>City</th>
+  			<tr>
+  			<tr>
+  				<td>Alabama School of Fine Arts</td>
+  				<td>Birmingham</td>
+  			</tr>
+  			<tr>
+  				<td>Alabama School of Math and Science</td>
+  				<td>Mobile</td>
+  			</tr>
+  			<tr>
+  				<td>Indian Springs School</td>
+  				<td>Indian Springs Village</td>
+  			</tr>
+  			<tr>
+  				<td>Lyman Ward Military Academy </td>
+  				<td>Camp Hill</td>
+  			</tr></table>
+  			<script>
+  			function createRow(name, loc){
+  				var table = document.getElementById("schoolsTable");
+  				var len = table.rows.length;
+				var row = table.insertRow(len);
+				var nameOfSchool = row.insertCell(0);
+				var locOfSchool = row.insertCell(1);
+				nameOfSchool.innerHTML = name;
+				locOfSchool.innerHTML = loc;
+  			}
+  			function clearTable(){
+  			var table = document.getElementById("schoolsTable");
+  			while(table.rows.length > 1){
+  				table.deleteRow(1);
+  				}
+  			}
+    		function showSchools(school) { 
+    		clearTable();
+    		myFunction();
+    		var name = document.getElementById("NameOfSchool");
+    		name.innerHTML=school;
+
+    			switch(school){
+    			case "Alabama":
+					createRow("Alabama School of Fine Arts ","Birmingham");
+					createRow("Alabama School of Math and Science ","Mobile");
+					createRow("Indian Springs School ","Indian Springs Village");
+					createRow("Lyman Ward Military Academy ","Camp Hill");
+					createRow("St. Bernard Preparatory School ","Cullman");
+					break;
+				case "Alaska":
+					createRow("Mt. Edgecumbe High School ","Sitka");
+					break;
+				case "Arizona":
+					createRow("Fenster School ","Tucson");
+					createRow("The Orme School of Arizona ","Mayer");
+					createRow("Southwestern Academy ","Rimrock");
+					createRow("Verde Valley School ","Sedona");
+					break;
+				case "Arkansas":
+
+					createRow("Arkansas School for Mathematics, Sciences, and the Arts ","Hot Springs");
+					createRow("Subiaco Academy ","Subiaco");
+					break;
+				case "California":
+					createRow("Army and Navy Academy ","Carlsbad");
+					createRow("Besant Hill School ","Ojai");
+					createRow("Cate School ","Carpinteria");
+					createRow("Dunn School ","Los Olivos");
+					createRow("Idyllwild Arts Academy ","Idyllwild");
+					createRow("Julian Youth Academy ","San Diego");
+					createRow("Midland School ","Los Olivos");
+					createRow("Monte Vista Christian School ","Watsonville");
+					createRow("Ojai Valley School ","Ojai");
+					createRow("St. Catherine's Academy ","Anaheim");
+					createRow("St. Michael's Preparatory School ","Silverado");
+					createRow("Santa Catalina School ","Monterey");
+					createRow("Southwestern Academy ","San Marino");
+					createRow("Stevenson School ","Pebble Beach");
+					createRow("The Thacher School ","Ojai");
+					createRow("Villanova Preparatory School ","Ojai");
+					createRow("Woodside Priory School ","Portola Valley");
+					break;
+				case "Colorado":
+					createRow("Colorado Rocky Mountain School ","Carbondale");
+					createRow("Fountain Valley School ","Colorado Springs");
+					createRow("Lowell Whiteman School ","Steamboat Springs");
+					break;
+				case "Connecticut":
+					createRow("Academy of the Holy Family ","Sprague");
+					createRow("Avon Old Farms School ","Avon");
+					createRow("Bridgeport International Academy ","Bridgeport");
+					createRow("Canterbury School ","New Milford");
+					createRow("Cheshire Academy ","Cheshire");
+					createRow("Choate Rosemary Hall ","Wallingford");
+					createRow("Devereux Glenholme School ","Washington");
+					createRow("Ethel Walker School ","Simsbury");
+					createRow("Forman School ","Litchfield");
+					createRow("Franklin Academy ","East Haddam");
+					createRow("Grove School ","Madison");
+					createRow("The Gunnery ","Washington");
+					createRow("Hotchkiss School ","Lakeville");
+					createRow("Indian Mountain School ","Lakeville");
+					createRow("Kent School ","Kent");
+					createRow("The Loomis Chaffee School ","Windsor");
+					createRow("Marianapolis Preparatory School ","Thompson");
+					createRow("Marvelwood School ","Kent");
+					createRow("Miss Porter's School ","Farmington");
+					createRow("Oxford Academy ","Westbrook");
+					createRow("Pomfret School ","Pomfret");
+					createRow("The Rectory School ","Pomfret");
+					createRow("Rumsey Hall School ","Washington");
+					createRow("St. Thomas More School ","Oakdale");
+					createRow("The Salisbury School ","Salisbury");
+					createRow("South Kent School ","South Kent");
+					createRow("Suffield Academy ","Suffield");
+					createRow("Taft School ","Watertown");
+					createRow("Westminster School ","Simsbury");
+					createRow("Westover School ","Middlebury");
+					createRow("The Woodhall School ","Bethlehem");
+					createRow("Woodstock Academy ","Woodstock");
+					break;
+				case "Delaware":
+					createRow("St. Andrew's School ","Middletown");
+					break;
+				case "District of Columbia":
+					createRow("St. Albans School ","Washington, D.C.");
+					break;
+				case "Florida":
+					createRow("Admiral Farragut Academy ","St. Petersburg, Florida");
+					createRow("The Bolles School ","Jacksonville");
+					createRow("IMG Academy ","Bradenton");
+					createRow("Saint Andrew's School ","Boca Raton, Florida");
+					break;
+				case "Georgia":
+					createRow("Brandon Hall School ","Atlanta");
+					createRow("Darlington School ","Rome");
+					createRow("Hidden Lake Academy ","Dahlonega");
+					createRow("Riverside Military Academy ","Gainesville");
+					createRow("Shepherd's Hill Academy ","Martin");
+					break;
+				case "Illinois":
+					createRow("Illinois Mathematics and Science Academy ","Aurora");
+					createRow("Lake Forest Academy ","Lake Forest");
+					createRow("Woodlands Academy of the Sacred Heart Girls' School ","Lake Forest");
+					break;
+				case "Indiana":
+					createRow("Culver Academies ","Culver");
+					createRow("Howe Military Academy ","Howe");
+					createRow("La Lumiere School ","La Porte");
+					break;
+				case "Iowa":
+					createRow("Maharishi School of the Age of Enlightenment ","Fairfield");
+					createRow("Scattergood Friends School ","West Branch");
+					break;
+				case "Kansas":
+					createRow("Maur Hill Mount Academy ","Atchison");
+					createRow("Riverbend International School ","Atchison, Kansas");
+					createRow("St. John's Military School ","Salina");
+					createRow("St. Mary's College, Kansas ","St. Marys");
+					createRow("Thomas More Prep-Marian ","Hays");
+					break;
+				case "Kentucky":
+					createRow("Appalachian Children's Home ","Barbourville");
+					createRow("Oneida Baptist Institute ","Clay County");
+					break;
+				case "Louisiana":
+					createRow("Academy of the Sacred Heart ","Grand Coteau");
+					createRow("Louisiana School for Math, Science, and the Arts ","Natchitoches");
+					break;
+				case "Maine":
+					createRow("Élan School ","Poland - closed 2011");
+					createRow("Fryeburg Academy ","Fryeburg");
+					createRow("Gould Academy ","Bethel");
+					createRow("Kents Hill School ","Kents Hill");
+					createRow("Maine School of Science and Mathematics ","Limestone");
+					break;
+				case "Maryland":
+					createRow("Garrison Forest School ","Owings Mills, Maryland");
+					createRow("Georgetown Preparatory School ","North Bethesda");
+					createRow("McDonogh School ","Owings Mills");
+					createRow("Oldfields School ","Glencoe");
+					createRow("St. James School ","St. James");
+					createRow("St. Timothy's School ","Stevenson");
+					createRow("The SEED School ","Baltimore, Maryland");
+					createRow("West Nottingham Academy ","Colora");
+					break;
+				case "Massachusetts":
+					createRow("Academy at Swift River ","Cummington");
+					createRow("Berkshire School ","Sheffield");
+					createRow("Brooks School ","North Andover");
+					createRow("Buxton School ","Williamstown");
+					createRow("Cambridge School of Weston ","Weston");
+					createRow("Chapel Hill - Chauncy Hall School ","Waltham");
+					createRow("Concord Academy ","Concord");
+					createRow("Cushing Academy ","Ashburnham");
+					createRow("Dana Hall School ","Wellesley");
+					createRow("Deerfield Academy ","Deerfield");
+					createRow("Eagle Hill School ","Hardwick");
+					createRow("Eaglebrook School","Deerfield");
+					createRow("Fay School ","Southborough");
+					createRow("Fessenden School ","West Newton");
+					createRow("Groton School ","Groton");
+					createRow("John Dewey Academy ","Great Barrington");
+					createRow("Lawrence Academy at Groton ","Groton");
+					createRow("MacDuffie School ","Springfield");
+					createRow("Middlesex School ","Concord");
+					createRow("Milton Academy ","Milton");
+					createRow("Miss Hall's School ","Pittsfield");
+					createRow("Northfield Mount Hermon School ","Northfield and Gill");
+					createRow("Phillips Academy ","Andover");
+					createRow("Riverview School ","East Sandwich");
+					createRow("St John's High School ","Shrewsbury");
+					createRow("St. Mark's School ","Southborough");
+					createRow("Stetson School ","Barre");
+					createRow("Stoneleigh-Burnham School ","Greenfield");
+					createRow("Tabor Academy ","Marion");
+					createRow("Walnut Hill School ","Natick");
+					createRow("Wilbraham and Monson Academy ","Wilbraham");
+					createRow("The Winchendon School ","Winchendon");
+					createRow("Worcester Academy ","Worcester");
+					break;
+				case "Michigan":
+					createRow("Cranbrook Kingswood School ","Bloomfield Hills");
+					createRow("Interlochen Arts Academy ","Interlochen");
+					createRow("The Leelanau School ","Glen Arbor");
+					break;
+				case "Minnesota":
+					createRow("Cotter High School ","Winona");
+					createRow("St. Croix Lutheran High School ","West St. Paul");
+					createRow("Saint John's Prep ","Collegeville");
+					createRow("Shattuck-Saint Mary's ","Faribault");
+					break;
+				case "Mississippi":
+					createRow("French Camp Academy ","French Camp");
+					createRow("Mississippi School for Mathematics and Science ","Columbus");
+					createRow("Mississippi School of the Arts ","Brookhaven");
+					createRow("Piney Woods Country Life School ","Piney Woods");
+					createRow("Saint Stanislaus College ","Bay St. Louis");
+					break;
+				case "Missouri":
+					createRow("Chaminade College Preparatory School ","St. Louis");
+					createRow("Missouri Military Academy ","Mexico");
+					createRow("Thomas Jefferson School ","Sunset Hills");
+					break;
+				case "Montana":
+					createRow("Chrysalis ","Eureka");
+					createRow("Mission Mountain School ","Condon - closed 2008");
+					createRow("Monarch School ","Heron");
+					createRow("Montana Academy ","Marion");
+					createRow("Spring Creek Lodge Academy ","Thompson Falls - closed 2009");
+					break;
+				case "Nebraska":
+					createRow("Mt. Michael Benedictine ","suburban Omaha");
+					break;
+				case "New Hampshire":
+					createRow("Brewster Academy ","Wolfeboro");
+					createRow("Cardigan Mountain School ","Canaan");
+					createRow("Derryfield School ","Manchester");
+					createRow("Dublin Christian Academy ","Dublin");
+					createRow("Dublin School ","Dublin");
+					createRow("Hampshire Country School ","Rindge");
+					createRow("High Mowing School ","Wilton");
+					createRow("Holderness School ","Holderness");
+					createRow("Immaculate Conception Apostolic School ","Center Harbor");
+					createRow("Kimball Union Academy ","Meriden");
+					createRow("New Hampton School ","New Hampton");
+					createRow("Oliverian School ","Haverhill");
+					createRow("Phillips Exeter Academy ","Exeter");
+					createRow("Proctor Academy ","Andover");
+					createRow("St. Paul's School ","Concord");
+					createRow("Shortridge Academy ","Milton");
+					createRow("Tilton School ","Tilton");
+					createRow("Wediko Children's Services ","Windsor");
+					createRow("White Mountain School ","Bethlehem");
+					break;
+				case "New Jersey":
+					createRow("The American Boychoir School ","Princeton");
+					createRow("Blair Academy ","Blairstown");
+					createRow("The Hun School ","Princeton");
+					createRow("The Lawrenceville School ","Lawrenceville");
+					createRow("The Peddie School ","Hightstown");
+					createRow("The Pennington School ","Pennington");
+					createRow("Purnell School ","Pottersville");
+					createRow("St. Benedict's Preparatory School ","Newark");
+					break;
+				case "New Mexico":
+					createRow("Armand Hammer United World College of the American West ","Montezuma");
+					break;
+				case "New York":
+					createRow("Darrow School ","New Lebanon");
+					createRow("Emma Willard School ","Troy");
+					createRow("Family Foundation School ","Hancock");
+					createRow("The Gow School ","South Wales");
+					createRow("Hackley School ","Tarrytown");
+					createRow("The Kildonan School ","Amenia");
+					createRow("The Masters School ","Dobbs Ferry");
+					createRow("Millbrook School ","Millbrook");
+					createRow("North Country School ","Lake Placid");
+					createRow("Northwood School ","Lake Placid");
+					createRow("Saint Thomas Choir School ","New York City");
+					createRow("The Stony Brook School ","Stony Brook");
+					createRow("Trinity-Pawling School ","Pawling");
+					break;
+				case "North Carolina":
+					createRow("American Hebrew Academy ","Greensboro");
+					createRow("Asheville School ","Asheville");
+					createRow("Christ School ","Arden");
+					createRow("New Leaf Academy ","Hendersonville");
+					createRow("North Carolina School of the Arts ","Winston-Salem");
+					createRow("North Carolina School of Science and Mathematics ","Durham");
+					createRow("Oak Ridge Military Academy ","Oak Ridge");
+					createRow("Saint Mary's School ","Raleigh");
+					createRow("Salem Academy ","Winston-Salem");
+					createRow("Wellspring Academy of the Carolinas ","Brevard");
+					break;
+				case "Ohio":
+					createRow("The Andrews School ","Willoughby");
+					createRow("Gilmour Academy ","Gates Mills");
+					createRow("Grand River Academy ","Austinburg");
+					createRow("Mount Vernon Academy ","Mount Vernon");
+					createRow("Olney Friends School ","Barnesville");
+					createRow("Western Reserve Academy ","Hudson");
+					break;
+				case "Oregon":
+					createRow("Academy for Global Exploration ","Ashland");
+					createRow("The Delphian School ","Sheridan");
+					createRow("Mount Bachelor Academy ","Prineville");
+					createRow("New Leaf Academy ","Bend");
+					createRow("Oregon Episcopal School ","Raleigh Hills");
+					createRow("St. Mary's School ","Medford");
+					break;
+				case "Pennsylvania":
+					createRow("Carson Long Military Institute ","New Bloomfield");
+					createRow("Church Farm School ","Exton");
+					createRow("George School ","Newtown");
+					createRow("Girard College ","Philadelphia");
+					createRow("The Grier School ","Tyrone");
+					createRow("The Hill School ","Pottstown");
+					createRow("The Kiski School ","Saltsburg");
+					createRow("Mercersburg Academy ","Mercersburg");
+					createRow("Milton Hershey School ","Hershey");
+					createRow("Perkiomen School ","Pennsburg");
+					createRow("Pine Forge Academy ","Pine Forge");
+					createRow("Valley Forge Military Academy ","Wayne");
+					createRow("Westtown School ","Westtown");
+					createRow("Wyoming Seminary ","Kingston");
+					break;
+				case "South Carolina":
+					createRow("Camden Military Academy ","Camden");
+					createRow("Lewisville Female Seminary ","Chester - closed 1854");
+					createRow("South Carolina Governor's School for the Arts and Humanities ","Greenville");
+					createRow("South Carolina Governor's School for Science and Mathematics ","Hartsville");
+					break;
+				case "Tennessee":
+					createRow("Bachman Academy ","McDonald");
+					createRow("Baylor School ","Chattanooga");
+					createRow("Highland Academy ","Portland");
+					createRow("McCallie School ","Chattanooga");
+					createRow("Memphis University School ","Memphis");
+					createRow("St. Andrew's-Sewanee School ","Sewanee");
+					createRow("Tennessee Governor's Academy for Math and Science ","Knoxville");
+					createRow("Tennessee School for the Deaf ","Knoxville");
+					createRow("The Webb School ","Bell Buckle");
+					break;
+				case "Texas":
+					createRow("Brook Hill School ","Bullard");
+					createRow("The Chinquapin School ","Houston");
+					createRow("Hockaday School ","Dallas");
+					createRow("Marine Military Academy ","Harlingen");
+					createRow("St. Stephen's Episcopal School ","Austin");
+					createRow("San Marcos Baptist Academy ","San Marcos");
+					createRow("Texas Academy of Mathematics and Science ","Denton");
+					createRow("TMI — The Episcopal School of Texas ","San Antonio");
+					break;
+				case "Utah":
+					createRow("DayStar Adventist Academy ","Castle Valley");
+					createRow("Majestic Ranch Academy ","Randolph");
+					createRow("Oakley School ","Oakley");
+					createRow("Provo Canyon School ","Provo and Orem");
+					createRow("Wasatch Academy ","Mt. Pleasant");
+					break;
+				case "Vermont":
+					createRow("Bromley Brook School ","Manchester Center");
+					createRow("Green Mountain Valley School ","Waitsfield");
+					createRow("King George School ","Sutton");
+					createRow("The Putney School ","Putney");
+					createRow("St. Johnsbury Academy ","St. Johnsbury");
+					createRow("Stratton Mountain School ","Stratton");
+					createRow("Vermont Academy ","Saxtons River");
+					break;
+				case "Virginia":
+					createRow("Blue Ridge School ","St. George");
+					createRow("Carlbrook School ","Halifax");
+					createRow("Chatham Hall ","Chatham");
+					createRow("Episcopal High School ","Alexandria");
+					createRow("Fishburne Military School ","Waynesboro");
+					createRow("Fork Union Military Academy ","Fork Union");
+					createRow("Foxcroft School ","Middleburg");
+					createRow("Hargrave Military Academy ","Chatham");
+					createRow("Madeira School ","McLean");
+					createRow("Massanutten Military Academy ","Woodstock");
+					createRow("The Miller School of Albemarle ","Charlottesville");
+					createRow("Oakland School ","Keswick");
+					createRow("Randolph-Macon Academy ","Front Royal");
+					createRow("St. Anne's-Belfield School ","Charlottesville");
+					createRow("St. Margaret's School ","Tappahannock");
+					createRow("Shenandoah Valley Academy ","New Market");
+					createRow("Virginia Episcopal School ","Lynchburg");
+					createRow("Woodberry Forest School ","Madison County");
+					break;
+				case "Washington":
+					createRow("Annie Wright School ","Tacoma");
+					createRow("Auburn Adventist Academy ","Auburn");
+					createRow("Northwest School ","Seattle");
+					createRow("Upper Columbia Academy ","Spangle");
+					break;
+				case "West Virginia":
+					createRow("Bluefield International Academy ","Bluefield");
+					createRow("Greenbrier Academy ","Pence Springs");
+					createRow("Greenbrier Military School ","Lewisburg");
+					createRow("The Highland School ","Highland");
+					createRow("Linsly School ","Wheeling");
+					createRow("Romney Classical Institute ","Romney - closed c. 1866");
+					break;
+				case "Wisconsin":
+					createRow("Conserve School ","Land O' Lakes");
+					createRow("Luther Preparatory School ","Watertown");
+					createRow("Oaklawn Academy ","Edgerton");
+					createRow("St. Lawrence Seminary High School ","Mt. Calvary");
+					createRow("Wayland Academy ","Beaver Dam");
+					break;
+    			default:
+    				alert("unknown");
+    				break;
+    				}
+    			
+    		}
+    		/* When the user clicks on the button,
+			toggle between hiding and showing the dropdown content */
+			function myFunction() {
+				document.getElementById("myDropdown").classList.toggle("show");
+			}
+
+			function filterFunction() {
+				var input, filter, ul, li, a, i;
+				input = document.getElementById("myInput");
+				filter = input.value.toUpperCase();
+				div = document.getElementById("myDropdown");
+				a = div.getElementsByTagName("a");
+				for (i = 0; i < a.length; i++) {
+					if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+						a[i].style.display = "";
+					} else {
+						a[i].style.display = "none";
+					}
+				}
+			}
+			</script>
+		</div>
+		</div>
+		<div id="About Us" class="tabcontent">
+  			<h3>Consultants:</h3>
+  			<p>Each consultant working for _____ has been extensively educated in the various applications processes. Additionally, 
+  			many are specialized in one area to maximize the knowledge of the whole organization. Our essay experts have 
+  			thoroughly analyzed the best techniques and responses along with being skilled writers themselves. Interviewing and 
+  			touring experts have been through the processes themselves and in my cases have been tour guides for the schools 
+  			they went to and reached out to their admissions officers for extra tips. Many of our staff members have been athletes 
+  			who have reached out to coaches themselves and will be able to extend their knowledge to aid consultees. Along with 
+  			these specializations, all of our members have personally been through the applications process for boarding schools.</p> 
+			<!-- add image here -->
+  			<h3>Our Mission:</h3>
+  			<p>While we understand that not everyone will be able to go to their number one school, we make it our mission to 
+  			give each and every one of our consultees the maximum chance of being accepted in the boarding school of 
+  			their choice. With our staff members having gone to boarding school, we understand the unique memories that are
+  			created there and wish to share these fruitful experiences with as many students as we can. Additionally,
+  			we want to make the process less confusing as we have been through the strenuous process ourselves. The
+  			application is difficult to complete alone, so we offer services to aid anybody who needs help.
+  			 
+  			</p> 
+  			<h3>Our Program:</h3>
+  			<p>Our program is designed to enhance consultees chances of acceptance. Additionally, the program is clear and organized to
+  			ease the difficulty and confusion often brought by such long processes. We make a schedule that's flexible and
+  			customized. We notify you well in advance for due dates. We make ourselves available for calls to consult and aid
+  			if consultees have any questions. And we offer a list of checkpoints to mark off progress along the way. Additional
+  			information is offered to help with essay writing, touring and interviewing in case of scheduling conflicts with
+  			consulting calls. We give guidelines and direction for SSAT prep. And we have templates for contacting coaches.</p> 
+		</div> 
+		<div id="FAQ" class="tabcontent">
+  			<h4>Where do I start?</h4>
+  			<p>You have come to the right place! Our program is designed not only to help you with acceptance, but also to make 
+  			sure that you will enjoy wherever you go. This site offers plenty of direction without ever needing to sign up.
+  			You never have to make any commitments until you know you are ready. Some starters would be to research locations
+  			or schools online, reach out to friends or family who have been, or create an account with us! Skim over the questions
+  			below and see what decisions you are most comfortable with making. Make sure to check out the schools tab to find schools in
+  			specific locations.</p>
+  			<h4>What is boarding school?</h4>
+  			<p>Boarding schools can take many forms (refer to the next question). A typical boarding school offers dormitories
+  			which allows students who live far away to spend their schoolyear on campus. Boarding schools take in an array of students
+  			who not only come from different states but also different countries. These schools hire the best teachers possible giving
+  			students an education more rigorous than public school. Class size is smaller compared to most other schools and total population
+  			is also significantly lower. </p>
+  			<h4>What are the different types of boarding school?</h4>
+  			
+  			<h4>How do I know if boarding school is right for me?</h4>
+  			
+  			
+		</div>
+		<div id="Log In" class="tabcontent">
+  			<form action="action_page.php" style="border:1px solid #ccc">
+  				<div class="container">
+    			<h1>Log In</h1>
+   		 		<p>Please fill in this form to log in.</p>
+    			<hr>
+
+    			<label for="email"><b>Email</b></label>
+    			<input type="text" placeholder="Enter Email" name="email" required>
+
+    			<label for="psw"><b>Password</b></label>
+    			<input type="password" placeholder="Enter Password" name="psw" required>
+
+    			<label>
+      			<input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+    			</label>
+			
+    			<div class="clearfix">
+      			<button type="submit" class="loginbtn">Log In</button>
+    			</div>
+  				</div>
+			</form>
+		</div>
+		<div id="Sign Up" class="tabcontent">
+  			<form action="action_page.php" style="border:1px solid #ccc">
+  				<div class="container">
+    			<h1>Sign Up</h1>
+   		 		<p>Please fill in this form to create an account.</p>
+    			<hr>
+
+    			<label for="email"><b>Email</b></label>
+    			<input type="text" placeholder="Enter Email" name="email" required>
+
+    			<label for="psw"><b>Password</b></label>
+    			<input type="password" placeholder="Enter Password" name="psw" required>
+
+    			<label for="psw-repeat"><b>Repeat Password</b></label>
+    			<input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+
+    			<label>
+      			<input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+    			</label>
+			
+    			<p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+    			<div class="clearfix">
+      			<button type="button" class="cancelbtn">Cancel</button>
+      			<button type="submit" class="signupbtn">Sign Up</button>
+    			</div>
+  				</div>
+			</form>
+		</div>
+		<div id="Contact" class="tabcontent">
+  			<h3>Contact Info:</h3>
+  			<h4>Email:</h4>
+  			<p>Email</p>
+  			<h4>Phone:</h4>
+  			<p>Phone</p>
+		</div>
+		
+		<script>
+		document.getElementsByClassName('tablinks')[0].click()
+		
+		function openTab(evt, tabName) {
+   		 // Declare all variables
+   		 var i, tabcontent, tablinks;
+
+   		 // Get all elements with class="tabcontent" and hide them
+    	tabcontent = document.getElementsByClassName("tabcontent");
+    	for (i = 0; i < tabcontent.length; i++) {
+        	tabcontent[i].style.display = "none";
+    	}
+
+    	// Get all elements with class="tablinks" and remove the class "active"
+    	tablinks = document.getElementsByClassName("tablinks");
+   		 for (i = 0; i < tablinks.length; i++) {
+       		 tablinks[i].className = tablinks[i].className.replace(" active", "");
+    	}	
+
+    	// Show the current tab, and add an "active" class to the link that opened the tab
+    	document.getElementById(tabName).style.display = "block";
+    	evt.currentTarget.className += " active";
+		}
+		</script>
+		
+	</body>
+</html>
