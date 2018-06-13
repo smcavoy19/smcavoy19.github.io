@@ -1,8 +1,48 @@
 <html>
 	<head>
 		<title>Boarding School Advisors</title>
+		
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<meta name="google-signin-client_id" content="844803974226-f90eqome3kotqq433vg07u1k45bl2vdg.apps.googleusercontent.com">
+		
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<style>
+		
+		 #customBtn {
+      display: inline-block;
+      background: white;
+      color: #444;
+      width: 190px;
+      border-radius: 5px;
+      border: thin solid #888;
+      box-shadow: 1px 1px 1px grey;
+      white-space: nowrap;
+    }
+    #customBtn:hover {
+      cursor: pointer;
+    }
+    span.label {
+      font-family: serif;
+      font-weight: normal;
+    }
+    span.icon {
+      background: url('/identity/sign-in/g-normal.png') transparent 5px 50% no-repeat;
+      display: inline-block;
+      vertical-align: middle;
+      width: 42px;
+      height: 42px;
+    }
+    span.buttonText {
+      display: inline-block;
+      vertical-align: middle;
+      padding-left: 42px;
+      padding-right: 42px;
+      font-size: 14px;
+      font-weight: bold;
+      /* Use the Roboto font that is loaded in the <head> */
+      font-family: 'Roboto', sans-serif;
+    }
+    
 		.dropbtn {
 			background-color: darkgray;
 			color: white;
@@ -779,15 +819,21 @@
   			below and see what decisions you are most comfortable with making. Make sure to check out the schools tab to find schools in
   			specific locations.</p>
   			<h4>What is boarding school?</h4>
-  			<p>Boarding schools can take many forms (refer to the next question). A typical boarding school offers dormitories
-  			which allows students who live far away to spend their schoolyear on campus. Boarding schools take in an array of students
-  			who not only come from different states but also different countries. These schools hire the best teachers possible giving
-  			students an education more rigorous than public school. Class size is smaller compared to most other schools and total population
-  			is also significantly lower. </p>
-  			<h4>What are the different types of boarding school?</h4>
-  			
+  			<p>Boarding schools can take many forms. A typical boarding school offers dormitories
+  			which allows students who live far away to spend their schoolyear on campus. A campus can have multiple dorms separated by
+  			gender or grade (some schools are coed others are not). A faculty member, typically an educator at the school, lives
+  			in the dorm as a faculty resident. They resemble the parents of a household. Other buildings usually include a dining hall,
+  			classrooms, athletic centers, admissions offices, and student stores. 
+  			Boarding schools take in an array of students who not only come from different states but also different countries. These 
+  			schools hire the best teachers possible giving students an education more rigorous than public school. Class size is smaller 
+  			compared to most other schools and total population is also significantly lower. Boarding schools vary so much that they cannot 
+  			be summarized in words and often take up close experiences to fully grasp what they entail. The best method of understanding
+  			boarding schools not just in general but also in how they differ is to take a couple tours of various campuses.  </p>
   			<h4>How do I know if boarding school is right for me?</h4>
-  			
+  			Thorough research, campus tours and interviews, and an understandment of the commitment are great ways to measure
+  			how well a boarding school is a fit for someone. There are many factors to take into account when deciding a school 
+  			and they all have different weights. This program is designed to help applicants make the best decision for themselves.
+  			Every consultant here can guarantee that no matter what school you go to you will have a good experience. 
   			
 		</div>
 		<div id="Log In" class="tabcontent">
@@ -814,7 +860,32 @@
 			</form>
 		</div>
 		<div id="Sign Up" class="tabcontent">
-  			<form action="action_page.php" style="border:1px solid #ccc">
+  			<script>
+			  var googleUser = {};
+			  var startApp = function() {
+				gapi.load('auth2', function(){
+				  // Retrieve the singleton for the GoogleAuth library and set up the client.
+				  auth2 = gapi.auth2.init({
+					client_id: '844803974226-f90eqome3kotqq433vg07u1k45bl2vdg.apps.googleusercontent.com',
+					cookiepolicy: 'single_host_origin',
+					// Request scopes in addition to 'profile' and 'email'
+					//scope: 'additional_scope'
+				  });
+				  attachSignin(document.getElementById('customBtn'));
+				});
+			  };
+
+			  function attachSignin(element) {
+				console.log(element.id);
+				auth2.attachClickHandler(element, {},
+					function(googleUser) {
+					  document.getElementById('name').innerText = "Signed in: " +
+						  googleUser.getBasicProfile().getName();
+					}, function(error) {
+					  alert(JSON.stringify(error, undefined, 2));
+					});
+			  }
+			  </script>
   				<div class="container">
     			<h1>Sign Up</h1>
    		 		<p>Please fill in this form to create an account.</p>
@@ -822,10 +893,8 @@
 
     			<label for="email"><b>Email</b></label>
     			<input type="text" placeholder="Enter Email" name="email" required>
-
     			<label for="psw"><b>Password</b></label>
     			<input type="password" placeholder="Enter Password" name="psw" required>
-
     			<label for="psw-repeat"><b>Repeat Password</b></label>
     			<input type="password" placeholder="Repeat Password" name="psw-repeat" required>
 
@@ -837,10 +906,21 @@
 
     			<div class="clearfix">
       			<button type="button" class="cancelbtn">Cancel</button>
+      			<div class="g-signin2" data-onsuccess="onSignIn">
       			<button type="submit" class="signupbtn">Sign Up</button>
+      			<div id="gSignInWrapper">
+				<span class="label">Sign in with:</span>
+				<div id="customBtn" class="customGPlusSignIn">
+				  <span class="icon"></span>
+				  <span class="buttonText">Google</span>
+				</div>
+			  </div>
+			  <div id="name"></div>
+			  <script>startApp();</script>
+      			</div>
     			</div>
   				</div>
-			</form>
+	
 		</div>
 		<div id="Contact" class="tabcontent">
   			<h3>Contact Info:</h3>
